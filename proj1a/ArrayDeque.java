@@ -76,6 +76,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (size == 0) {
+            return null;
+        }
         nextfirst += 1;
         if (nextfirst == hold) {
             nextfirst = 0;
@@ -89,6 +92,9 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
+        if (size == 0) {
+            return null;
+        }
         nextlast -= 1;
         if (nextlast == -1) {
             nextlast = hold - 1;
@@ -105,7 +111,12 @@ public class ArrayDeque<T> {
         if (index >= hold) {
             return null;
         }
-        return arraylist[index];
+
+        if (nextfirst + index + 1 >= hold) {
+            return arraylist[nextfirst + index + 1 - hold];
+        } else {
+            return arraylist[nextfirst + index + 1];
+        }
     }
 
 }
