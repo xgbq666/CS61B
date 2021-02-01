@@ -48,8 +48,8 @@ public class ArrayDeque<T> {
 
         arraylist[nextlast] = item;
         nextlast += 1;
-        if (nextfirst >= hold) {
-            nextfirst = 0;
+        if (nextlast >= hold) {
+            nextlast = 0;
         }
         size += 1;
     }
