@@ -18,16 +18,32 @@ public class TestPalindrome {
 
     @Test
     public void testisPalindrome() {
-        Boolean actual = palindrome.isPalindrome("");
-        assertEquals(true, actual);
+        assertTrue(palindrome.isPalindrome("noon"));
+        assertTrue(palindrome.isPalindrome("1 222 1"));
+        assertTrue(palindrome.isPalindrome("&^^&"));
+        assertTrue(palindrome.isPalindrome("  "));
+        assertTrue(palindrome.isPalindrome("1"));
+        assertFalse(palindrome.isPalindrome("whale"));
+        assertTrue(palindrome.isPalindrome("xanax"));
+        assertTrue(palindrome.isPalindrome("g"));
+        assertTrue(palindrome.isPalindrome(""));
+        assertFalse(palindrome.isPalindrome("cat"));
+        assertFalse(palindrome.isPalindrome("nhh"));
     }
 
     @Test
     public void testisPalindromeOffByOne() {
-        OffByOne offByOne = new OffByOne();
-        assertTrue(palindrome.isPalindrome("flake", offByOne));
-        assertTrue(palindrome.isPalindrome("", offByOne));
-        assertTrue(palindrome.isPalindrome("FLAKE", offByOne));
-        assertTrue(palindrome.isPalindrome("&%", offByOne));
+        OffByOne comp = new OffByOne();
+        assertFalse(palindrome.isPalindrome("tweak", comp));
+        assertTrue(palindrome.isPalindrome("flake", comp));
+        assertTrue(palindrome.isPalindrome("t", comp));
+        assertTrue(palindrome.isPalindrome("", comp));
+        assertTrue(palindrome.isPalindrome("flake", comp));
+        assertTrue(palindrome.isPalindrome("acdb", comp));
+        assertTrue(palindrome.isPalindrome(" ", comp));
+        assertTrue(palindrome.isPalindrome("", comp));
+        assertFalse(palindrome.isPalindrome("  ", comp));
+        assertFalse(palindrome.isPalindrome("acca", comp));
+        assertFalse(palindrome.isPalindrome("nhhchr", comp));
     }
 }
