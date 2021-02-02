@@ -18,13 +18,16 @@ public class TestPalindrome {
 
     @Test
     public void testisPalindrome() {
-        Boolean actual = palindrome.isPalindrome("mom");
+        Boolean actual = palindrome.isPalindrome("");
         assertEquals(true, actual);
     }
 
     @Test
     public void testisPalindromeOffByOne() {
         OffByOne offByOne = new OffByOne();
-        assertTrue(palindrome.isPalindrome("abcb", offByOne));
+        assertTrue(palindrome.isPalindrome("flake", offByOne));
+        assertTrue(palindrome.isPalindrome("", offByOne));
+        assertTrue(palindrome.isPalindrome("FLAKE", offByOne));
+        assertTrue(palindrome.isPalindrome("&%", offByOne));
     }
 }

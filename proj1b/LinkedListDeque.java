@@ -1,4 +1,6 @@
-public class LinkedListDeque<T> implements Deque<T> {
+import java.util.LinkedList;
+
+public class LinkedListDeque<T> extends LinkedList<T> implements Deque<T> {
     private int size;
     private LinkedNode sentinel;
 
