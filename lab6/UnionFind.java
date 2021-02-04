@@ -27,6 +27,7 @@ public class UnionFind {
     /* Returns the parent of v1. If v1 is the root of a tree, returns the
        negative size of the tree for which v1 is the root. */
     public int parent(int v1) {
+        validate(v1);
         return parent[v1];
     }
 
