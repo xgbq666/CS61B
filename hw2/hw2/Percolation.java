@@ -9,6 +9,7 @@ public class Percolation {
     private int size;
     private Boolean[][] plist;
     private WeightedQuickUnionUF uf;
+    private WeightedQuickUnionUF uf1;
 
     public Percolation(int N) {
         if (N < 0) {
@@ -20,14 +21,17 @@ public class Percolation {
         bottomsite = N * N + 1;
         plist = new Boolean[N][N];
         uf = new WeightedQuickUnionUF(N * N + 2);
+        uf1 = new WeightedQuickUnionUF(N * N + 1);
         for (int row = 0; row < size; row += 1) {
             for (int col = 0; col < size; col += 1) {
                 plist[row][col] = false;
             }
         }
-        for (int i = 0; i < size; i += 1) {
-            uf.union(xyTo1d(0,i), topsite);
+        for (int i = 0; i < size; i += 1)
+        {
+            uf.union(xyTo1d(0, i), topsite);
             uf.union(xyTo1d(size - 1, i), bottomsite);
+            uf1.union(xyTo1d(0, i), topsite);
         }
     }
 
@@ -36,21 +40,25 @@ public class Percolation {
         if (row - 1 >= 0) {
             if (plist[row - 1][col]) {
                 uf.union(xyTo1d(row - 1, col), nid);
+                uf1.union(xyTo1d(row - 1, col), nid);
             }
         }
         if (row + 1 <= size - 1) {
             if (plist[row + 1][col]) {
                 uf.union(xyTo1d(row + 1, col), nid);
+                uf1.union(xyTo1d(row + 1, col), nid);
             }
         }
         if (col - 1 >= 0) {
             if (plist[row][col - 1]) {
                 uf.union(xyTo1d(row, col - 1), nid);
+                uf1.union(xyTo1d(row, col - 1), nid);
             }
         }
         if (col + 1 <= size - 1) {
             if (plist[row][col + 1]) {
                 uf.union(xyTo1d(row, col + 1), nid);
+                uf1.union(xyTo1d(row, col + 1), nid);
             }
         }
     }
@@ -83,7 +91,7 @@ public class Percolation {
             return false;
         }
         int xy1d = xyTo1d(row, col);
-        return uf.connected(xy1d, topsite);
+        return uf1.connected(xy1d, topsite);
     }
 
     public int numberOfOpenSites() {
@@ -91,6 +99,9 @@ public class Percolation {
     }
 
     public boolean percolates() {
+        if (size == 1 && !isOpen(0, 0)) {
+            return false;
+        }
         return uf.connected(topsite, bottomsite);
     }
 
