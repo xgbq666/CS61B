@@ -3,6 +3,8 @@ package hw2;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
+    private int topsite;
+    private int bottomsite;
     private int opennum;
     private int size;
     private Boolean[][] plist;
@@ -14,12 +16,18 @@ public class Percolation {
         }
         size = N;
         opennum = 0;
+        topsite = N * N;
+        bottomsite = N * N + 1;
         plist = new Boolean[N][N];
-        uf = new WeightedQuickUnionUF(N * N);
+        uf = new WeightedQuickUnionUF(N * N + 2);
         for (int row = 0; row < size; row += 1) {
             for (int col = 0; col < size; col += 1) {
                 plist[row][col] = false;
             }
+        }
+        for (int i = 0; i < size; i += 1) {
+            uf.union(xyTo1d(0,i), topsite);
+            uf.union(xyTo1d(size - 1, i), bottomsite);
         }
     }
 
@@ -75,15 +83,7 @@ public class Percolation {
             return false;
         }
         int xy1d = xyTo1d(row, col);
-        for (int i = 0; i < size; i += 1) {
-            if (!isOpen(0, i)) {
-                continue;
-            }
-            if (uf.connected(xy1d, i)) {
-                return true;
-            }
-        }
-        return false;
+        return uf.connected(xy1d, topsite);
     }
 
     public int numberOfOpenSites() {
@@ -91,15 +91,7 @@ public class Percolation {
     }
 
     public boolean percolates() {
-        for (int i = 0; i < size; i += 1) {
-            if (!isOpen(size - 1, i)) {
-                continue;
-            }
-            if (isFull(size - 1, i)) {
-                return true;
-            }
-        }
-        return false;
+        return uf.connected(topsite, bottomsite);
     }
 
     private int xyTo1d(int row, int col) {
