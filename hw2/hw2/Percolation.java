@@ -68,6 +68,9 @@ public class Percolation {
         if (row < 0 || col < 0 || row >= size || col >= size) {
             throw new IndexOutOfBoundsException();
         }
+        if (!isOpen(row, col)) {
+            return false;
+        }
         int xy1d = xyTo1d(row, col);
         for (int i = 0; i < size; i += 1) {
             if (uf.connected(xy1d, i)) {

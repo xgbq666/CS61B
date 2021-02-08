@@ -4,14 +4,14 @@ import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
 
 public class PercolationStats {
-    private int[] outcome;
+    private double[] outcome;
     private int times;
 
     public PercolationStats(int N, int T, PercolationFactory pf) {
         if (N <= 0 || T <= 0) {
             throw new IllegalArgumentException();
         }
-        outcome = new int[T];
+        outcome = new double[T];
         times = T;
         for (int i = 0; i < T; i += 1) {
             Percolation percolation = pf.make(N);
@@ -20,7 +20,7 @@ public class PercolationStats {
                 int col = StdRandom.uniform(N);
                 percolation.open(row, col);
             }
-            outcome[i] = percolation.numberOfOpenSites();
+            outcome[i] = (double) percolation.numberOfOpenSites() / (double) times;
         }
     }
 
