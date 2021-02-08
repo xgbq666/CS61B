@@ -76,6 +76,9 @@ public class Percolation {
         }
         int xy1d = xyTo1d(row, col);
         for (int i = 0; i < size; i += 1) {
+            if (!isOpen(0, i)) {
+                continue;
+            }
             if (uf.connected(xy1d, i)) {
                 return true;
             }
@@ -89,6 +92,9 @@ public class Percolation {
 
     public boolean percolates() {
         for (int i = 0; i < size; i += 1) {
+            if (!isOpen(size - 1, i)) {
+                continue;
+            }
             if (isFull(size - 1, i)) {
                 return true;
             }
