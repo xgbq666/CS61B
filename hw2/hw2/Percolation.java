@@ -51,6 +51,9 @@ public class Percolation {
         if (row < 0 || col < 0 || row >= size || col >= size) {
             throw new IndexOutOfBoundsException();
         }
+        if (isOpen(row, col)) {
+            return;
+        }
         plist[row][col] = true;
         int id;
         connectAroundOpen(row, col);
@@ -98,17 +101,6 @@ public class Percolation {
     }
 
     public static void main(String[] args) {
-        Percolation test = new Percolation(4);
-        System.out.println(test.percolates());
-        test.open(0, 0);
-        test.open(1, 0);
-        System.out.println(test.numberOfOpenSites());
-        test.open(1, 2);
-        System.out.println(test.isFull(1, 2));
-        test.open(1, 1);
-        test.open(2, 2);
-        test.open(3, 2);
-        System.out.println(test.percolates());
-        System.out.println(test.numberOfOpenSites());
+
     }
 }

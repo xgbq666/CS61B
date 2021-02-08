@@ -20,7 +20,7 @@ public class PercolationStats {
                 int col = StdRandom.uniform(N);
                 percolation.open(row, col);
             }
-            outcome[i] = (double) percolation.numberOfOpenSites() / (double) times;
+            outcome[i] = (double) percolation.numberOfOpenSites() / (double) (N * N);
         }
     }
 
