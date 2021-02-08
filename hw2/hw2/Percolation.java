@@ -27,8 +27,7 @@ public class Percolation {
                 plist[row][col] = false;
             }
         }
-        for (int i = 0; i < size; i += 1)
-        {
+        for (int i = 0; i < size; i += 1) {
             uf.union(xyTo1d(0, i), topsite);
             uf.union(xyTo1d(size - 1, i), bottomsite);
             uf1.union(xyTo1d(0, i), topsite);
