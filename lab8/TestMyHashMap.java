@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /** Tests by Brendan Hu, Spring 2015, revised for 2016 by Josh Hug */
@@ -138,6 +139,18 @@ public class TestMyHashMap {
         studentIDs.put("evil alan", 345);
         assertEquals(345, studentIDs.get("evil alan").intValue());
         assertEquals(studentIDs.get("evil alan"), studentIDs.get("alan"));
+    }
+
+    @Test
+    public void TestIterator() {
+        MyHashMap<Integer, Integer> myHashMap = new MyHashMap<>();
+        for (int i = 0; i < 20; i += 1) {
+            myHashMap.put(i, i + 1);
+        }
+        Iterator<Integer> iterator = myHashMap.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 
     public static void main(String[] args) {
